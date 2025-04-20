@@ -115,6 +115,9 @@ class SimpleEnv(MiniGridEnv):
                 super().step(0)
         return super().step(2)
 
+    def get_actions(self):
+        return ACTIONS
+
     def step(self, action):
         if(0 <= action and action <= 3):
             return self._move_agent(action)

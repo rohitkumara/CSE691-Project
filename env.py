@@ -123,6 +123,14 @@ class SimpleEnv(MiniGridEnv):
             return self._move_agent(action)
         else:
             return super().step(action)
+    
+    def extract_state(self):
+        return {
+            'agent_pos': tuple(self.agent_pos),
+            'agent_dir': self.agent_dir,
+            'carrying': self.carrying,
+            'grid': copy.deepcopy(self.grid),
+        }
 
     
 if __name__ == "__main__":

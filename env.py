@@ -63,6 +63,8 @@ class SimpleEnv(MiniGridEnv):
         # Place the door and key
         self.grid.set(5, 6, Door(COLOR_NAMES[0], is_locked=True))
         self.grid.set(3, 6, Key(COLOR_NAMES[0]))
+        # self.grid.set(5, 2, Door(COLOR_NAMES[1], is_locked=True))
+        self.grid.set(2, 5, Key(COLOR_NAMES[1]))
         self.grid.set(3, 1, Box(COLOR_NAMES[3]))
 
         # Place a goal square in the bottom-right corner
@@ -193,11 +195,15 @@ class SimpleEnv(MiniGridEnv):
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     env = SimpleEnv(render_mode="human")
-
-    action_list = [4, 3, 2, 1, 0]
-    obs, info = env.reset()
-    plt.imshow(obs["image"])
-    plt.show()
+    env.reset()
+    grid = env.grid
+    objects = []
+    for x in range(grid.width):
+        for y in range(grid.height):
+            obj = grid.get(x, y)
+            if obj:
+                objects.append(obj.color)
+    print(objects)
 
 
     

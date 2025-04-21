@@ -59,9 +59,6 @@ class PathPlanner:
             state, cost, fail = self.simulate_action(state, action)
             if fail:
                 return float('inf')
-            if state['carrying'] is not None and state['carrying'].type == 'key':
-                print("picked up key")
-                key_bonus = 3  # You can adjust this value
             total_cost += cost
         return total_cost
 

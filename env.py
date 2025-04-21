@@ -7,7 +7,7 @@ from minigrid.core.world_object import Door, Goal, Key, Wall, Box
 from minigrid.manual_control import ManualControl
 from minigrid.minigrid_env import MiniGridEnv
 
-ACTIONS = [0, 1, 2, 3, 4, 5, 6] # left, right, up, down, pickup, drop, toggle
+ACTIONS = [0, 1, 2, 3] # left, right, up, down
 
 class SimpleEnv(MiniGridEnv):
     def __init__(
@@ -40,7 +40,7 @@ class SimpleEnv(MiniGridEnv):
 
     @staticmethod
     def _gen_mission():
-        return "grand mission"
+        return "Deliver the box to the goal"
 
     def gen_obs(self):
         obs = super().gen_obs()
@@ -56,6 +56,8 @@ class SimpleEnv(MiniGridEnv):
 
         # Generate vertical separation wall
         for i in range(0, height):
+            # if(i==3):
+            #     continue
             self.grid.set(5, i, Wall())
         
         # Place the door and key
@@ -73,7 +75,7 @@ class SimpleEnv(MiniGridEnv):
         else:
             self.place_agent()
 
-        self.mission = "grand mission"
+        self.mission = "Deliver the box to the goal"
 
     def _move_agent(self, action):
         #   3
@@ -118,10 +120,73 @@ class SimpleEnv(MiniGridEnv):
     def get_actions(self):
         return ACTIONS
 
-    def step(self, action):
+    def _drop(self):
+        # Check all adjacent cells for empty space
+                    directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+                    goal_found = False
+                    for dx, dy in directions:
+                        nx = self.agent_pos[0] + dx
+                        ny = self.agent_pos[1] + dy
+                        if (nx, ny) == self.goal:
+                            cell = self.grid.get(nx, ny)
+                            if cell and cell.type == 'goal':
+                                self.grid.set(nx, ny, self.carrying)
+                                self.carrying = None
+                                goal_found = True
+                                break
+                    if not goal_found:
+                        for dx, dy in directions:
+                            nx = self.agent_pos[0] + dx
+                            ny = self.agent_pos[1] + dy
+                            if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
+                                cell = self.grid.get(nx, ny)
+                                if cell is None:  # Found empty space
+                                    self.grid.set(nx, ny, self.carrying)
+                                    self.carrying = None
+                                    break
+
+    def _toggle(self, obj):
+        directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+        for dx, dy in directions:
+            nx = self.agent_pos[0] + dx
+            ny = self.agent_pos[1] + dy
+            if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
+                cell = self.grid.get(nx, ny)
+                if cell and cell.is_locked:
+                    if obj and cell.type != obj:
+                        continue  # Skip if not the desired object type
+                    cell.toggle(self, (nx, ny))
+                    break
+
+    def _pickup(self, obj):
+        directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+        for dx, dy in directions:
+            nx = self.agent_pos[0] + dx
+            ny = self.agent_pos[1] + dy
+            if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
+                cell = self.grid.get(nx, ny)
+                if cell and cell.can_pickup() and cell.type == obj:
+                    self.carrying = cell
+                    self.grid.set(nx, ny, None)
+                    break
+    
+    def step(self, action, obj=""):
         if(0 <= action and action <= 3):
             return self._move_agent(action)
         else:
+            action = action-1
+            if action == self.actions.pickup:
+                if self.carrying is None:
+                    self._pickup(obj)
+                else:
+                    self._drop()
+                    self._pickup(obj)
+            elif action == self.actions.drop:
+                if self.carrying is not None:
+                    self._drop()
+            elif action == self.actions.toggle:
+                self._toggle(obj)
+            
             return super().step(action)
 
     

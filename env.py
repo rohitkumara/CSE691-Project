@@ -154,11 +154,12 @@ class SimpleEnv(MiniGridEnv):
             ny = self.agent_pos[1] + dy
             if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
                 cell = self.grid.get(nx, ny)
-                if cell and cell.is_locked:
-                    if obj and cell.type != obj:
-                        continue  # Skip if not the desired object type
-                    cell.toggle(self, (nx, ny))
-                    break
+                if isinstance(cell, Door):
+                    if cell.is_locked:
+                        if obj and cell.type != obj:
+                            continue  # Skip if not the desired object type
+                        cell.toggle(self, (nx, ny))
+                        break
 
     def _pickup(self, obj):
         directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]

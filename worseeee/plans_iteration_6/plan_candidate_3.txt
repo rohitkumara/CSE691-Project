@@ -1,0 +1,20 @@
+Steps:
+Move to the purple box.
+Move to the goal.
+Move to the purple box.
+Pick up the box.
+Move to the green key.
+Drop the box.
+Pick up the green key.
+Move to the green door.
+Open the green door.
+Move to the blue key.
+Drop the green key.
+Pick up the blue key.
+Move to the blue door.
+Open the blue door.
+Move to the purple box.
+Drop the blue key.
+Pick up the box.
+Move to the goal.
+Drop the box.

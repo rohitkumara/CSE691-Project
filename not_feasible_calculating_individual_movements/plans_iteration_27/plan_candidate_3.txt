@@ -1,0 +1,15 @@
+Okay, I will continue from where the previous plan left off.
+Move to (4, 2) while holding the box.
+Move to (4, 3) while holding the box.
+Move to (3, 3) while holding the box.
+Move to (2, 3) while holding the box.
+Move to (2, 4) while holding the box.
+Drop the box.
+Move to the green key.
+Pick up the green key.
+Move to the green door.
+Toggle the green door.
+Move to the box.
+Pick up the box.
+Move to the goal.
+Drop the box.

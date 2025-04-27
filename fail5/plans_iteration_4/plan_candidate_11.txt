@@ -1,0 +1,10 @@
+Okay, I understand the environment and the mission. Here's the plan:
+Pick up the green key
+Move to (2, 7)
+Drop the purple box
+Move to the green door
+Toggle the green door
+Move to the purple box
+Pick up the purple box
+Move to the goal
+Drop the purple box

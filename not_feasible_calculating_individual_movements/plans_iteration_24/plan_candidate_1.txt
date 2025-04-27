@@ -1,0 +1,13 @@
+Okay, I will continue from the last known position of the agent at (3, 4) with the purple box.
+Move to (3, 5) with the purple box.
+Move to the green key.
+Drop the box.
+Pick up the green key.
+Move to the green door.
+Toggle the green door.
+Move to the purple box.
+Drop the green key.
+Pick up the purple box.
+Move to (6, 5).
+Move to the goal.
+Drop the box.

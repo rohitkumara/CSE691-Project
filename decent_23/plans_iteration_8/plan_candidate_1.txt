@@ -1,0 +1,8 @@
+Move to (3, 6)
+Pick up blue key
+Move to (5, 6)
+Toggle the blue door
+Move to (3, 1)
+Pick up the purple box
+Move to the goal
+Drop the box

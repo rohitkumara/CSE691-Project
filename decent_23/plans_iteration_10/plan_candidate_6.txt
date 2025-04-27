@@ -1,0 +1,24 @@
+Okay, I will generate a plan to deliver the box to the goal.
+**Steps:**
+Pick up the blue key
+Move to (3, 1)
+Pick up the box
+Move to (3, 6)
+Drop the box
+Pick up the blue key
+Move to the blue door
+Toggle the blue door
+Move to (3, 1)
+Drop the key
+Pick up the box
+Move to the green key
+Drop the box
+Pick up the green key
+Move to the green door
+Toggle the green door
+Move to (2, 5)
+Drop the key
+Move to (3, 1)
+Pick up the box
+Move to the goal
+Drop the box

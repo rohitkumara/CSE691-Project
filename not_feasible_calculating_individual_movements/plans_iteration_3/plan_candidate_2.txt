@@ -1,0 +1,14 @@
+Okay, I will generate a plan for the agent to deliver the box to the goal.
+Move to (3,3): Move one step east with the box.
+Move to (4, 2): Move one step east.
+Move to the box
+Pick up the box
+Move to the green key
+Drop the box
+Pick up the green key
+Move to the green door
+Toggle the green door
+Move to the box
+Pick up the box
+Move to the goal
+Drop the box

@@ -1,0 +1,17 @@
+Okay, I'm ready to plan the rest of the steps for the agent.
+Steps:
+Move to (2, 4)
+Pick up green key
+Move to (3, 1)
+Drop the green key
+Pick up the box
+Move to (3, 2)
+Move to (4, 2)
+Move to (5, 2)
+Toggle green door
+Move to (6, 2)
+Move to (7, 2)
+Move to (7, 3)
+Move to (7, 4)
+Move to the goal
+Drop the box

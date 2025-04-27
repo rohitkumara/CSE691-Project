@@ -1,0 +1,22 @@
+Okay, I will continue from the agent's last position (4, 6).
+Pick up the blue key.
+Move to (5, 6).
+Toggle the blue door.
+Move to (5, 5).
+Move to (5, 4).
+Move to (5, 3).
+Move to (5, 2).
+Toggle the green door.
+Move to (5, 1).
+Move to (4, 1).
+Move to (3, 1).
+Pick up the purple box.
+Move to (4, 1).
+Move to (5, 1).
+Move to (6, 1).
+Move to (7, 1).
+Move to (7, 2).
+Move to (7, 3).
+Move to (7, 4).
+Move to the goal.
+Drop the purple box.

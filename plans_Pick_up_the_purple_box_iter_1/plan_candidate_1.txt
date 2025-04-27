@@ -1,0 +1,4 @@
+Here are a few valid subtasks, given the agent's current state and the environment:
+**Move to (3, 2)** (Moving towards the right side of the environment, potentially to navigate around the walls and towards the goal.)
+**Move to (4, 1)** (Moving towards the right side of the environment, potentially to navigate around the walls and towards the goal.)
+**Move to (3, 0)** (Moving towards the top side of the environment, potentially to navigate around the walls and towards the goal.)

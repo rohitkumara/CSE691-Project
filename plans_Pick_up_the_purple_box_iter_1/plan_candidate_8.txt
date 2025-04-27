@@ -1,0 +1,9 @@
+Here are a few valid subtasks, given the agent's current state and the environment:
+**Move to (3, 2)** (Moving towards the right side of the environment, avoiding the walls and the green key)
+**Move to (4, 1)** (Moving towards the right side of the environment, avoiding the walls and the green key)
+**Move to (3, 0)** (Moving towards the right side of the environment, avoiding the walls and the green key)
+**Move to (4, 2)** (Moving towards the right side of the environment, avoiding the walls and the green key)
+**Move to (3, 3)** (Moving towards the right side of the environment, avoiding the walls and the green key)
+**Move to (4, 0)** (Moving towards the right side of the environment, avoiding the walls and the green key)
+**Move to (3, 4)** (Moving towards the right side of the environment, avoiding the walls and the green key)
+**Move to (4, 3)** (Moving towards the right side of

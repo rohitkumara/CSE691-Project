@@ -1,0 +1,23 @@
+Pick up the purple box
+Move to (3, 2)
+Move to (3, 5)
+Pick up the blue key
+Move to (3, 7)
+Move to (4, 6)
+Move to the blue door
+Toggle the blue door
+Move to (4, 5)
+Move to (3, 4)
+Move to (3, 3)
+Move to (3, 2)
+Drop the purple box
+Move to (2, 5)
+Pick up the green key
+Move to (4, 5)
+Move to the green door
+Toggle the green door
+Move to (6, 5)
+Move to (3, 2)
+Pick up the purple box
+Move to the goal
+Drop the purple box

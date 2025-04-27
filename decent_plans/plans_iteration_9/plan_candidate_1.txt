@@ -1,0 +1,6 @@
+Okay, here's the plan:
+Toggle the green door.
+Move to the purple box.
+Pick up the box.
+Move to the goal.
+Drop the box.

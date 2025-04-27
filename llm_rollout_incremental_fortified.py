@@ -34,7 +34,7 @@ Objects: {[f"{obj['color']} {obj['type']} at {obj['pos']}" for obj in objects]}.
 Goal: {goal}.
 Mission: {mission}.
 
-List at least 3 useful first subtasks the agent could attempt to achieve the mission.
+List at least 5 useful first subtasks the agent could attempt to achieve the mission.
 Each subtask should be a short phrase like 'Pick up red key' or 'Move to blue box'.
 """
     else:

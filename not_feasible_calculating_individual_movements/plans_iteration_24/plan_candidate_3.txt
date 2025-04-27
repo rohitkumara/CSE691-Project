@@ -1,0 +1,13 @@
+Move to (3,1): Navigate to the location of the purple box.
+Move to (4, 1): Move south to (4, 1).
+Move to (5, 1): Move south to (5, 1).
+Move to (3,1): Move north to (3, 1).
+Move to (4,1): Move south to (4, 1).
+Move to (4, 1): Move south towards the goal.
+Move to (3, 1): Move north to (3, 1).
+Move to (4, 1): Move south to (4, 1).
+Move to (3, 1): Return to the location of the purple box.
+Move to (4, 1): Move south to (4, 1) with the purple box.
+Move to (3, 1): Move north to (3, 1) with the purple box.
+Move to (3, 3): Move east to (3, 3) with the purple box.
+Move

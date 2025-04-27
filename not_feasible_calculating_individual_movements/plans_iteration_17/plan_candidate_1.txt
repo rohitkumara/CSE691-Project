@@ -1,0 +1,13 @@
+Okay, I will continue from where the agent left off.
+Here's the updated plan:
+Pick up the box.
+Move to the green key.
+Drop the box.
+Pick up the green key.
+Move to the green door.
+Open the green door.
+Move to the box.
+Drop the green key.
+Pick up the box.
+Move to the goal.
+Drop the box.

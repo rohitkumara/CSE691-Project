@@ -1,0 +1,11 @@
+Okay, I will continue from the last instruction.
+**Move to (3, 5):** Move east to (3, 5) with the purple box.
+**Move to (2, 5):** Move north to (2, 5) with the purple box.
+**Pick up the green key:** Pick up the green key.
+**Move to (3, 5):** Move south to (3, 5) with the green key.
+**Move to (3, 1):** Move west to (3, 1) with the green key.
+**Move to (4, 1):** Move south to (4, 1) with the green key.
+**Move to (3, 1):** Move north to (3, 1) with the green key.
+**Move to (3, 5):** Move east to (3, 5) with the green key.
+**Move to (2, 5):** Move north to (2, 5) with the green key.
+**

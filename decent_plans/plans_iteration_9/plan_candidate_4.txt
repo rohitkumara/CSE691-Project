@@ -1,0 +1,10 @@
+Okay, here's the plan:
+Toggle the green door.
+Move to the blue key.
+Pick up the blue key.
+Move to the blue door.
+Toggle the blue door.
+Move to the box.
+Pick up the box.
+Move to the goal.
+Drop the box.

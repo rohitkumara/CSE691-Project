@@ -1,0 +1,4 @@
+Move to (3,5): Move one step east with the box.
+Move to (6,5): Move one step east with the box.
+Move to the goal
+Drop the box

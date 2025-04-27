@@ -1,0 +1,16 @@
+Move to the box
+Pick up the box
+Move to (4, 2)
+Move to (4, 3)
+Move to (4, 4)
+Move to (4, 5)
+Move to (4, 6)
+Move to (4, 7)
+Move to (4, 8)
+Move to (5, 8)
+Move to (6, 8)
+Move to (7, 8)
+Move to (7, 7)
+Move to (7, 6)
+Move to the goal
+Drop the box

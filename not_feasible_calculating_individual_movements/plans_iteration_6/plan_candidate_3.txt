@@ -1,0 +1,15 @@
+Okay, I will continue from the last actions.
+Move to (3,6): Move one step east with the box.
+Toggle blue door: Open the blue door.
+Move to (3, 1): Move to the box.
+Pick up the box.
+Move to (2, 5): Move to the green key.
+Drop the box.
+Pick up the green key.
+Move to (5, 2): Move to the green door.
+Toggle green door: Open the green door.
+Move to (3, 1): Move to the box.
+Drop the green key.
+Pick up the box.
+Move to the goal.
+Drop the box.

@@ -63,7 +63,7 @@ class SimpleEnv(MiniGridEnv):
         # Place the door and key
         self.grid.set(5, 6, Door(COLOR_NAMES[0], is_locked=True))
         self.grid.set(3, 6, Key(COLOR_NAMES[0]))
-        # self.grid.set(5, 2, Door(COLOR_NAMES[1], is_locked=True))
+        self.grid.set(5, 2, Door(COLOR_NAMES[1], is_locked=True))
         self.grid.set(2, 5, Key(COLOR_NAMES[1]))
         self.grid.set(3, 1, Box(COLOR_NAMES[3]))
 

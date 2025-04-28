@@ -211,7 +211,7 @@ def best_first_fortified_rollout_planner():
     queue = []
     iteration = 0
 
-    initial_subtasks = get_subtasks(agent_pos, objects, goal, mission, prior_chain=None, num_subtasks=12)
+    initial_subtasks = get_subtasks(agent_pos, objects, goal, mission, prior_chain=None, num_subtasks=8)
     for subtask in initial_subtasks:
         queue.append((0, [subtask]))
 

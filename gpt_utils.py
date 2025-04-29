@@ -62,10 +62,7 @@ def format_env_state_for_gpt(agent_pos, objects, goal_pos, mission):
             ---
 
             """
-        f"The agent is at position {agent_pos}.\n"
-        f"{object_descriptions}\n"
-        f"The goal is at {goal_pos}.\n"
-        f"The agents mission is {mission}.\n"
+        
         "Plan the steps the agent should take to solve the task."
     )
 
@@ -122,13 +119,13 @@ def get_target_position(plan_step, objects):
         if not any(color.lower() in plan_step.lower() for color in COLOR_NAMES):
             color_match = True
         if obj['type'] in plan_step.lower() and color_match and action_type != "move":
-            return (action_type, obj)
+            return [action_type, obj]
         if obj['type'] in plan_step.lower() and color_match:
             return obj['pos']
     return None
 
 def execute_plan(env, plan, path):
-    print("Executing high-level plan from GPT-4:")
+    print("Executing high-level plan from Gemini:")
     timesteps = 0
     for step in plan:
         objects = extract_objects(env.grid)

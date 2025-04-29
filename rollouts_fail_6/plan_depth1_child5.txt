@@ -1,0 +1,24 @@
+=== PLAN DETAILS ===
+Depth: 1 | Child: 5
+Mission: Deliver the box to the goal
+
+Completed Subtasks So Far:
+- 1. Move to green key.
+
+=== Steps ===
+1. Okay, here's the plan:
+2. Move to the green key.
+3. Move to the blue key.
+4. Pick up the blue key.
+5. Move to the blue door.
+6. Toggle the blue door.
+7. Move to the green key.
+8. Pick up the green key.
+9. Move to the green door.
+10. Toggle the green door.
+11. Move to the purple box.
+12. Pick up the purple box.
+13. Move to the goal.
+14. Drop the purple box.
+
+=== End of Plan ===

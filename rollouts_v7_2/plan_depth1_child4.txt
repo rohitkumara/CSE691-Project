@@ -1,0 +1,18 @@
+=== PLAN DETAILS ===
+Depth: 1 | Child: 4
+Mission: Deliver the box to the goal
+
+=== Steps ===
+1. Okay, I will generate a plan for the agent to deliver the box to the goal.
+2. Steps:
+3. Move to the green key.
+4. Move to the purple box.
+5. Pick up the box.
+6. Move to the green key.
+7. Pick up the green key.
+8. Move to the green door.
+9. Toggle the green door.
+10. Move to the goal.
+11. Drop the box.
+
+=== End of Plan ===

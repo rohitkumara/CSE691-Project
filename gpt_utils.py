@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 from minigrid.core.constants import COLOR_NAMES  # Add this import at the top
 
 
-# client = OpenAI(
-#     api_key="AIzaSyBWH0YSvquwUH3PFrh8cbjw1zUjnDGHaKU",
-#     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-# )
-
 client = OpenAI(
-    api_key="api_key"
+    api_key="AIzaSyBWH0YSvquwUH3PFrh8cbjw1zUjnDGHaKU",
+    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
+
+# client = OpenAI(
+#     api_key="api_key",
+# )
 
 
 def extract_objects(grid):
@@ -63,7 +63,7 @@ def format_env_state_for_gpt(agent_pos, objects, goal_pos, mission):
         "Plan the steps the agent should take to solve the task."
     )
 
-def get_gpt_plan(prompt, model="gpt-4-turbo"):
+def get_gpt_plan(prompt, model="gemini-2.0-flash"):
     messages = [
         {"role": "system", "content": (
             "You are a high-level planning assistant for a robot navigating a maze. "

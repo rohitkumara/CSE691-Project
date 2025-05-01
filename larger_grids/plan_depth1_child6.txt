@@ -1,0 +1,14 @@
+=== PLAN DETAILS ===
+Depth: 1 | Child: 6
+Mission: Deliver all the boxes to the goals
+
+Completed Subtasks So Far:
+- 1. Toggle blue door
+
+=== Steps ===
+1. Move to purple box
+2. Pick up purple box
+3. Move to purple goal
+4. Drop purple box
+
+=== End of Plan ===

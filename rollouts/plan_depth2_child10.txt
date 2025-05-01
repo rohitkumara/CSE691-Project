@@ -1,0 +1,31 @@
+=== PLAN DETAILS ===
+Depth: 2 | Child: 10
+Mission: Deliver all the boxes to the goals
+
+Completed Subtasks So Far:
+- 1. Toggle locked green door
+- 2. Toggle locked green door
+
+=== Steps ===
+1. Pick up the purple box
+2. Move to (6, 10)
+3. Move to the blue key
+4. Drop the purple box
+5. Pick up the blue key
+6. Move to the locked blue door
+7. Toggle locked blue door
+8. Move to (6, 10)
+9. Drop the blue key
+10. Pick up the purple box
+11. Move to the purple goal
+12. Drop the purple box
+13. Move to (6, 10)
+14. Move to the green key
+15. Move to the yellow box
+16. Pick up the yellow box
+17. Move to the locked green door
+18. Toggle locked green door
+19. Move to the yellow goal
+20. Drop the yellow box
+
+=== End of Plan ===

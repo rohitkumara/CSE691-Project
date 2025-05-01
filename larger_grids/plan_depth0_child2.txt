@@ -1,0 +1,23 @@
+=== PLAN DETAILS ===
+Depth: 0 | Child: 2
+Mission: Deliver all the boxes to the goals
+
+=== Steps ===
+1. Move to green key
+2. Pick up green key
+3. Move to green door
+4. Toggle green door
+5. Move to yellow box
+6. Pick up yellow box
+7. Move to yellow goal
+8. Drop yellow box
+9. Move to blue key
+10. Pick up blue key
+11. Move to blue door
+12. Toggle blue door
+13. Move to purple box
+14. Pick up purple box
+15. Move to purple goal
+16. Drop purple box
+
+=== End of Plan ===

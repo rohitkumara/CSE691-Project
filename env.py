@@ -12,7 +12,7 @@ ACTIONS = [0, 1, 2, 3] # left, right, up, down
 class SimpleEnv(MiniGridEnv):
     def __init__(
         self,
-        size=10,
+        size=15,
         agent_start_pos=(2, 2),
         agent_start_dir=0,
         max_steps: int | None = None,
@@ -58,12 +58,15 @@ class SimpleEnv(MiniGridEnv):
         for i in range(0, height):
             # if(i==3):
             #     continue
-            self.grid.set(4, i, Wall())
+            self.grid.set(6, i, Wall())
         
+        for i in range(6, width):
+            self.grid.set(i, 6, Wall())
+
         # Place the door and key
-        self.grid.set(4, 6, Door(COLOR_NAMES[0], is_locked=True))
+        self.grid.set(6, 10, Door(COLOR_NAMES[0], is_locked=True))
         self.grid.set(3, 8, Key(COLOR_NAMES[0]))
-        self.grid.set(4, 2, Door(COLOR_NAMES[1], is_locked=True))
+        self.grid.set(6, 2, Door(COLOR_NAMES[1], is_locked=True))
         self.grid.set(2, 5, Key(COLOR_NAMES[1]))
         self.grid.set(3, 1, Box(COLOR_NAMES[3]))
         self.grid.set(2, 6, Box(COLOR_NAMES[5]))
@@ -77,8 +80,8 @@ class SimpleEnv(MiniGridEnv):
         self.goal.append(((8, 2), g.color))
         g = Goal()
         g.color = COLOR_NAMES[3]
-        self.put_obj(g, 8, 5)
-        self.goal.append(((8, 5), g.color))
+        self.put_obj(g, 11, 11)
+        self.goal.append(((11, 11), g.color))
 
         # Place the agent
         if self.agent_start_pos is not None:
@@ -87,7 +90,7 @@ class SimpleEnv(MiniGridEnv):
         else:
             self.place_agent()
 
-        self.mission = "Deliver the box to the goal"
+        self.mission = "Deliver all the boxes to the goals"
 
     def _move_agent(self, action):
         #   3

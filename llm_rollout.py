@@ -138,7 +138,7 @@ def generate_environment_description(env, agent_pos, objects, goal_pos, width=10
 
     return "\n".join(desc)
 
-def get_gpt_subtasks(prompt, model="gpt-4-turbo"):
+def get_gpt_subtasks(prompt, model="gemini-2.0-flash"):
     messages = [
         {"role": "system", "content": "List multiple valid subtasks using only allowed actions (Move, Pick up, Drop, Toggle)."},
         {"role": "user", "content": prompt}
@@ -165,6 +165,7 @@ def filter_valid_subtasks(subtasks):
 
 
 def get_subtasks(env, agent_pos, objects, goal, mission, prior_chain=None, width=10, height=10, num_subtasks=3):
+    print("SUBTASKS COUNT:", num_subtasks)
     env_desc = generate_environment_description(env, agent_pos, objects, goal, width, height)
     if prior_chain is None:
         prompt = f"""{env_desc}
@@ -178,6 +179,7 @@ Instructions:
 - Subtasks must describe *intentional transitions* (e.g., moving to a key, unlocking a door, reaching the goal).
 - Each subtask must be a single line.
 - Do not include object descriptions, locations, colors, or explanations.
+- DO NOT suggest simple movements like "move left", "move right", "move to (x,y)", or "move one step".
 - Do not include more than necessary — only key transitions.
 
 ---
@@ -203,9 +205,10 @@ Instructions:
 - Use only the following actions: `Move to`, `Pick up`, `Toggle`, `Drop`
 - Use object names (e.g., "blue key", "green door", "box", "goal") as targets.
 - Do not include object coordinates or explain anything.
-- Only include subtasks required to unlock access or make progress.
+- Only include subtasks required to unlock doors or make progress.
 - Assume the agent cannot pass through locked doors unless they are toggled.
 - Subtasks must appear in a valid order based on reachability.
+- To open a locked door, the agent must first pick up the key of matching color.
 
 
 ---
@@ -381,7 +384,7 @@ def generate_plan_from_chain(env, subtask_chain, agent_pos, objects, goal, missi
     full_prompt = prompt + "\n".join(env_lines) + example
     #full_prompt = full_prompt
 
-    # print("\n[LLM Prompt for Full Plan Generation]\n", full_prompt)
+    #print("\n[LLM Prompt for Full Plan Generation]\n", full_prompt)
 
     return get_gpt_plan(full_prompt)
 
@@ -442,6 +445,17 @@ def best_first_fortified_rollout_planner():
     while not done and iteration < MAX_DEPTH:
         num_subtasks = 8 if iteration == 0 else (6 if iteration == 1 else 3)
 
+        # eval_base_env = copy.deepcopy(current_env)
+        # #print(current_chain)
+        # if current_chain:
+        #     for i in current_chain:
+        #         apply_subtask_to_env(eval_base_env, i)  # Apply last best subtask
+        
+
+        #apply_subtask_to_env(current_env, current_chain) if current_chain else None
+        # agent_pos = tuple(current_env.agent_pos)
+        # objects = extract_objects(current_env.grid)
+
         # Always regenerate fresh environment description
         env_desc = generate_environment_description(current_env,
             agent_pos,
@@ -477,25 +491,26 @@ def best_first_fortified_rollout_planner():
         for subtask in subtasks:
             child_id += 1
             print(child_id, "Current chosen subtask for rollout:", subtask)
+            subtask_env = copy.deepcopy(current_env)
             h = ""
-            h = apply_subtask_to_env(current_env, subtask)
+            h = apply_subtask_to_env(subtask_env, subtask)
             if h == "stuck":
                 continue
-            agent_pos = current_env.agent_pos
-            objects = extract_objects(current_env.grid)
+            agent_pos = subtask_env.agent_pos
+            objects = extract_objects(subtask_env.grid)
 
             candidate_chain = current_chain + [subtask]
             agent_pos = (int(agent_pos[0]), int(agent_pos[1]))
 
             # sys.exit()
-            plan = generate_plan_from_chain(current_env, candidate_chain, agent_pos, objects, goal, mission)
+            plan = generate_plan_from_chain(subtask_env, candidate_chain, agent_pos, objects, goal, mission)
             # plan = ['Pick up the purple box', 'Move to the green key', 'Drop the purple box', 'Pick up the green key', 'Move to the green door', 'Toggle the green door', 'Move to the purple box', 'Pick up the purple box', 'Move to the purple goal', 'Drop the purple box']
             # plan = filter_valid_subtasks(plan)
 
             if not is_plan_valid(plan):
                 continue
 
-            env_copy = copy.deepcopy(current_env)
+            env_copy = copy.deepcopy(subtask_env)
             path = PathPlanner(env_copy, None)
 
             rollout_gif_path = f"rollouts/rollout_depth{iteration}_child{child_id}.gif"
@@ -510,6 +525,7 @@ def best_first_fortified_rollout_planner():
 
             if rollout_cost < best_rollout_cost:
                 best_rollout_cost = rollout_cost
+                print(subtask)
                 best_subtask = subtask
                 best_plan = [best_subtask] + plan
 
@@ -535,14 +551,14 @@ def best_first_fortified_rollout_planner():
         print(f"[Step {iteration}] Executing best subtask: {best_subtask}")
         current_chain.append(best_subtask)
 
-        # 🌟 Apply subtask and immediately refresh environment
+        #🌟 Apply subtask and immediately refresh environment
         apply_subtask_to_env(current_env, best_subtask)
         agent_pos = tuple(current_env.agent_pos)
         objects = extract_objects(current_env.grid)
 
         # 🌟 Fresh environment description is generated each loop
 
-        if is_box_at_goal(current_env):
+        if is_box_at_goal(subtask_env):
             print("[Box delivered successfully!]")
             done = True
 

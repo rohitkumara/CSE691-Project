@@ -1,0 +1,12 @@
+Okay, I understand the environment and the mission. Here's the plan for the agent to deliver the purple box to the green goal:
+Move to (3,1)
+Pick up the purple box
+Move to (2,5)
+Drop the box
+Pick up the green key
+Move to (5,2)
+Open the green door
+Move to (3,1)
+Pick up the purple box
+Move to the goal
+Drop the box

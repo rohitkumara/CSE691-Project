@@ -1,0 +1,12 @@
+Okay, I understand the environment and the goal. Here's the plan for the agent to deliver the box to the goal:
+Move to (4, 1): Move with the box towards the goal.
+Move to (4, 2): Continue moving towards the right side of the environment with the box.
+Move to the green key.
+Drop the box.
+Pick up the green key.
+Move to the green door.
+Toggle the green door.
+Move to the box.
+Pick up the box.
+Move to the goal.
+Drop the box.

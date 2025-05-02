@@ -1,0 +1,6 @@
+Here are a few valid subtasks, given the agent's current state and the environment:
+**Move to (3, 2)** (Moving towards the green door)
+**Move to (3, 0)** (Moving towards the walls)
+**Move to (4, 1)** (Moving towards the green door)
+**Move to (2, 1)** (Moving towards the start)
+**Move to (3, 5)** (Moving towards the blue key)

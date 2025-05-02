@@ -1,0 +1,10 @@
+Okay, here's the plan:
+Move to (4, 1)
+Move to (5, 1)
+Move to (6, 1)
+Move to (7, 1)
+Move to (7, 2)
+Move to (7, 3)
+Move to (7, 4)
+Move to the goal
+Drop the box

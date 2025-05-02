@@ -1,0 +1,5 @@
+Move to green door at (5, 2)
+**Move to box:** Move to the location of the box.
+Pick up the box
+Move to the green goal
+Drop the box

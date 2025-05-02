@@ -1,0 +1,3 @@
+Pick up the purple box.
+Move to the green goal.
+Drop the box.

@@ -1,0 +1,20 @@
+Move to (2, 3)
+Move to (2, 4)
+Move to the green key
+Pick up the green key
+Move to (3, 5)
+Move to (4, 2)
+Move to the green door
+Toggle the green door
+Move to (6, 2)
+Move to (6, 1)
+Move to (4, 1)
+Move to the box
+Pick up the box
+Move to (4, 2)
+Move to (6, 2)
+Move to (7, 2)
+Move to (7, 3)
+Move to (7, 4)
+Move to the goal
+Drop the box

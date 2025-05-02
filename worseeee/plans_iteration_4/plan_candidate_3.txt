@@ -1,0 +1,14 @@
+Steps:
+Move to the green goal.
+Move to the green goal.
+Move to the box
+Pick up the box
+Move to the green key
+Drop the box
+Pick up the green key
+Move to the green door
+Open the door
+Move to the box
+Pick up the box
+Move to the goal
+Drop the box

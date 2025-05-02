@@ -1,0 +1,11 @@
+Move to the purple box.
+Pick up the purple box.
+Move to the green door.
+Drop the purple box.
+Move to the green key.
+Pick up the green key.
+Toggle the green door.
+Move to the purple box.
+Pick up the purple box.
+Move to the green goal.
+Drop the purple box.

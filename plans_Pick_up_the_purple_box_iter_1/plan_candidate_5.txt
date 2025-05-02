@@ -1,0 +1,6 @@
+Here are a few valid subtasks, given the current state and allowed actions:
+**Move to (3, 2)** (Moving towards the green key and eventually the goal)
+**Move to (4, 1)** (Moving towards the green key and eventually the goal)
+**Move to (3, 0)** (Moving towards the green key and eventually the goal)
+**Move to (2, 1)** (Moving towards the green key and eventually the goal)
+**Move to (2, 2)** (Moving towards the green key and eventually the goal)

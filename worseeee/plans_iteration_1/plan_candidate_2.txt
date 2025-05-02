@@ -1,0 +1,9 @@
+Steps:
+Move to the purple box
+Pick up the purple box
+Drop the purple box
+Move to the goal
+Move to the purple box
+Pick up the purple box
+Move to the goal
+Drop the purple box

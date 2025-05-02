@@ -1,0 +1,13 @@
+Okay, I understand. Here's the plan for the agent to deliver the box to the goal:
+Pick up the green key
+Move to (3, 7)
+Move to the blue key
+Pick up the blue key
+Move to the green door
+Open the green door
+Move to the blue door
+Open the blue door
+Move to the box
+Pick up the box
+Move to the goal
+Drop the box

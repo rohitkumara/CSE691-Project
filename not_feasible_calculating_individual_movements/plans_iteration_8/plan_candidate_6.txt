@@ -1,0 +1,10 @@
+Okay, I understand the environment and the goal. Here's the plan for the agent to deliver the box to the goal:
+Move to the green key.
+Pick up the green key.
+Move to the green door.
+Open the green door.
+Move to the box.
+Pick up the box.
+Move to (5,6): Move one step north with the box.
+Move to (7,5): Move one step east.
+Drop the box.

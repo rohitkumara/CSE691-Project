@@ -1,0 +1,15 @@
+=== PLAN DETAILS ===
+Depth: 0 | Child: 5
+Mission: Deliver the box to the goal
+
+=== Steps ===
+1. Move to the green key
+2. Pick up the green key
+3. Move to the green door
+4. Open the green door
+5. Move to the box
+6. Pick up the box
+7. Move to the goal
+8. Drop the box
+
+=== End of Plan ===

@@ -1,0 +1,10 @@
+Okay, I will generate a plan for the agent to deliver the box to the goal.
+Steps:
+Move to the blue key.
+Pick up the blue key.
+Move to the blue door.
+Toggle the blue door.
+Move to the purple box.
+Pick up the purple box.
+Move to the green goal.
+Drop the purple box.

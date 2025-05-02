@@ -1,0 +1,11 @@
+Here's a plan to deliver the purple box to the green goal:
+Here are the next subtasks to continue solving the mission:
+Move towards the green goal.
+Move to the purple box
+Pick up the purple box
+Move to the green door
+Pick up the green key
+Move to the green door
+Toggle the green door
+Move to the green goal
+Drop the purple box

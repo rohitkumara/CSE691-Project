@@ -1,0 +1,12 @@
+Here are a few valid subtasks, given the current state and allowed actions:
+**Move to (3, 2)** (Moving towards the right side of the environment)
+**Move to (4, 1)** (Moving towards the right side of the environment)
+**Move to (3, 0)** (Moving towards the top side of the environment)
+**Move to (2, 1)** (Moving towards the left side of the environment)
+**Move to (2, 3)** (Moving towards the top side of the environment)
+**Move to (2, 4)** (Moving towards the top side of the environment)
+**Move to (2, 6)** (Moving towards the top side of the environment)
+**Move to (2, 7)** (Moving towards the top side of the environment)
+**Move to (2, 8)** (Moving towards the top side of the environment)
+**Move to (3, 2)** (Moving towards the right side of the environment)
+**Move to (4,

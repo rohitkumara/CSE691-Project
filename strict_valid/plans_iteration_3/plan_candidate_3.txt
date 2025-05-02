@@ -1,0 +1,9 @@
+Steps:
+Pick up green key
+Move to the goal
+Move to the green door
+Toggle the green door
+Move to the box
+Pick up the box
+Move to the goal
+Drop the box

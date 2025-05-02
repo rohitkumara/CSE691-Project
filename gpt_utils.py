@@ -6,7 +6,7 @@ from minigrid.core.constants import COLOR_NAMES  # Add this import at the top
 
 
 client = OpenAI(
-    api_key="AIzaSyBQnPr3MhWnS5gx_QFHzNBu66GE9DgpJs0",
+    api_key="AIzaSyBWH0YSvquwUH3PFrh8cbjw1zUjnDGHaKU",
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
 
@@ -32,7 +32,7 @@ def format_env_state_for_gpt(agent_pos, objects, goal_pos, mission):
             - Actions must be 1-step executable (Move to (x, y), Pick up, Drop, Toggle).
             - No need to mention coordinates of each object in the plan.
             - Once the agent has the correct object and the goal is reachable, DO NOT list every tile step — just say:  
-            → “Move to the goal”
+            - “Move to the goal”
 
             ---
 
@@ -62,10 +62,7 @@ def format_env_state_for_gpt(agent_pos, objects, goal_pos, mission):
             ---
 
             """
-        f"The agent is at position {agent_pos}.\n"
-        f"{object_descriptions}\n"
-        f"The goal is at {goal_pos}.\n"
-        f"The agents mission is {mission}.\n"
+        
         "Plan the steps the agent should take to solve the task."
     )
 
@@ -122,13 +119,13 @@ def get_target_position(plan_step, objects):
         if not any(color.lower() in plan_step.lower() for color in COLOR_NAMES):
             color_match = True
         if obj['type'] in plan_step.lower() and color_match and action_type != "move":
-            return (action_type, obj['type'])
+            return [action_type, obj]
         if obj['type'] in plan_step.lower() and color_match:
             return obj['pos']
     return None
 
 def execute_plan(env, plan, path):
-    print("Executing high-level plan from GPT-4:")
+    print("Executing high-level plan from Gemini:")
     timesteps = 0
     for step in plan:
         objects = extract_objects(env.grid)

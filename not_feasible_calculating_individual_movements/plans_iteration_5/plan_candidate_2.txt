@@ -1,0 +1,13 @@
+Okay, here's the plan:
+Move to (3,5): Move one step east with the box.
+Move to (3,1): Move to the purple box.
+Pick up the box.
+Move to the green key.
+Drop the box.
+Pick up the green key.
+Move to the green door.
+Toggle the green door.
+Move to the box.
+Pick up the box.
+Move to the goal.
+Drop the box.

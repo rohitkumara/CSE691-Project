@@ -63,7 +63,7 @@ class SimpleEnv(MiniGridEnv):
         # Place the door and key
         self.grid.set(5, 6, Door(COLOR_NAMES[0], is_locked=True))
         self.grid.set(3, 6, Key(COLOR_NAMES[0]))
-        # self.grid.set(5, 2, Door(COLOR_NAMES[1], is_locked=True))
+        self.grid.set(5, 2, Door(COLOR_NAMES[1], is_locked=True))
         self.grid.set(2, 5, Key(COLOR_NAMES[1]))
         self.grid.set(3, 1, Box(COLOR_NAMES[3]))
 
@@ -124,28 +124,28 @@ class SimpleEnv(MiniGridEnv):
 
     def _drop(self):
         # Check all adjacent cells for empty space
-                    directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
-                    goal_found = False
-                    for dx, dy in directions:
-                        nx = self.agent_pos[0] + dx
-                        ny = self.agent_pos[1] + dy
-                        if (nx, ny) == self.goal:
-                            cell = self.grid.get(nx, ny)
-                            if cell and cell.type == 'goal':
-                                self.grid.set(nx, ny, self.carrying)
-                                self.carrying = None
-                                goal_found = True
-                                break
-                    if not goal_found:
-                        for dx, dy in directions:
-                            nx = self.agent_pos[0] + dx
-                            ny = self.agent_pos[1] + dy
-                            if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
-                                cell = self.grid.get(nx, ny)
-                                if cell is None:  # Found empty space
-                                    self.grid.set(nx, ny, self.carrying)
-                                    self.carrying = None
-                                    break
+        directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+        goal_found = False
+        for dx, dy in directions:
+            nx = self.agent_pos[0] + dx
+            ny = self.agent_pos[1] + dy
+            if (nx, ny) == self.goal:
+                cell = self.grid.get(nx, ny)
+                if cell and cell.type == 'goal':
+                    self.grid.set(nx, ny, self.carrying)
+                    self.carrying = None
+                    goal_found = True
+                    break
+        if not goal_found:
+            for dx, dy in directions:
+                nx = self.agent_pos[0] + dx
+                ny = self.agent_pos[1] + dy
+                if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
+                    cell = self.grid.get(nx, ny)
+                    if cell is None:  # Found empty space
+                        self.grid.set(nx, ny, self.carrying)
+                        self.carrying = None
+                        break
 
     def _toggle(self, obj):
         directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
@@ -156,22 +156,35 @@ class SimpleEnv(MiniGridEnv):
                 cell = self.grid.get(nx, ny)
                 if isinstance(cell, Door):
                     if cell.is_locked:
-                        if obj and cell.type != obj:
+                        if obj and cell.type != obj['type']:
                             continue  # Skip if not the desired object type
                         cell.toggle(self, (nx, ny))
                         break
 
     def _pickup(self, obj):
         directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
-        for dx, dy in directions:
-            nx = self.agent_pos[0] + dx
-            ny = self.agent_pos[1] + dy
-            if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
-                cell = self.grid.get(nx, ny)
-                if cell and cell.can_pickup() and cell.type == obj:
-                    self.carrying = cell
-                    self.grid.set(nx, ny, None)
-                    break
+        if self.carrying is not None:
+            # If already carrying something, drop it first
+            old_item = self.carrying
+            for dx, dy in directions:
+                nx = self.agent_pos[0] + dx
+                ny = self.agent_pos[1] + dy
+                if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
+                    cell = self.grid.get(nx, ny)
+                    if cell and cell.can_pickup() and cell.type == obj['type'] and cell.color == obj['color']:
+                        self.carrying = cell
+                        self.grid.set(nx, ny, old_item)
+                        break
+        else:
+            for dx, dy in directions:
+                nx = self.agent_pos[0] + dx
+                ny = self.agent_pos[1] + dy
+                if 0 <= nx < self.grid.width and 0 <= ny < self.grid.height:
+                    cell = self.grid.get(nx, ny)
+                    if cell and cell.can_pickup() and cell.type == obj['type'] and cell.color == obj['color']:
+                        self.carrying = cell
+                        self.grid.set(nx, ny, None)
+                        break
     
     def step(self, action, obj=""):
         if(0 <= action and action <= 3):
@@ -179,11 +192,7 @@ class SimpleEnv(MiniGridEnv):
         else:
             action = action-1
             if action == self.actions.pickup:
-                if self.carrying is None:
-                    self._pickup(obj)
-                else:
-                    self._drop()
-                    self._pickup(obj)
+                self._pickup(obj)
             elif action == self.actions.drop:
                 if self.carrying is not None:
                     self._drop()

@@ -1,0 +1,15 @@
+Okay, I understand the environment and the mission. Here's the plan for the agent:
+Move to the green key.
+Move to the blue key.
+Move to the green key.
+Pick up the green key.
+Move to the green door.
+Toggle the green door.
+Move to the blue key.
+Pick up the blue key.
+Move to the blue door.
+Toggle the blue door.
+Move to the box.
+Pick up the box.
+Move to the goal.
+Drop the box.

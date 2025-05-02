@@ -1,0 +1,56 @@
+Depth 0 | Child 1 | Cost: 17.00
+Plan File: rollouts/plan_depth0_child1.txt
+GIF File: rollouts/rollout_depth0_child1.gif
+------------------------------------------------------
+Depth 0 | Child 2 | Cost: 17.00
+Plan File: rollouts/plan_depth0_child2.txt
+GIF File: rollouts/rollout_depth0_child2.gif
+------------------------------------------------------
+Depth 0 | Child 3 | Cost: INF (Failed)
+Plan File: rollouts/plan_depth0_child3.txt
+GIF File: rollouts/rollout_depth0_child3.gif
+------------------------------------------------------
+Depth 0 | Child 4 | Cost: 23.00
+Plan File: rollouts/plan_depth0_child4.txt
+GIF File: rollouts/rollout_depth0_child4.gif
+------------------------------------------------------
+Depth 0 | Child 5 | Cost: 17.00
+Plan File: rollouts/plan_depth0_child5.txt
+GIF File: rollouts/rollout_depth0_child5.gif
+------------------------------------------------------
+Depth 0 | Child 6 | Cost: 18.00
+Plan File: rollouts/plan_depth0_child6.txt
+GIF File: rollouts/rollout_depth0_child6.gif
+------------------------------------------------------
+Depth 1 | Child 1 | Cost: 15.00
+Plan File: rollouts/plan_depth1_child1.txt
+GIF File: rollouts/rollout_depth1_child1.gif
+------------------------------------------------------
+Depth 1 | Child 2 | Cost: INF (Failed)
+Plan File: rollouts/plan_depth1_child2.txt
+GIF File: rollouts/rollout_depth1_child2.gif
+------------------------------------------------------
+Depth 1 | Child 3 | Cost: 15.00
+Plan File: rollouts/plan_depth1_child3.txt
+GIF File: rollouts/rollout_depth1_child3.gif
+------------------------------------------------------
+Depth 1 | Child 4 | Cost: INF (Failed)
+Plan File: rollouts/plan_depth1_child4.txt
+GIF File: rollouts/rollout_depth1_child4.gif
+------------------------------------------------------
+Depth 1 | Child 5 | Cost: 29.00
+Plan File: rollouts/plan_depth1_child5.txt
+GIF File: rollouts/rollout_depth1_child5.gif
+------------------------------------------------------
+Depth 2 | Child 1 | Cost: 31.00
+Plan File: rollouts/plan_depth2_child1.txt
+GIF File: rollouts/rollout_depth2_child1.gif
+------------------------------------------------------
+Depth 2 | Child 2 | Cost: 30.00
+Plan File: rollouts/plan_depth2_child2.txt
+GIF File: rollouts/rollout_depth2_child2.gif
+------------------------------------------------------
+Depth 2 | Child 3 | Cost: 19.00
+Plan File: rollouts/plan_depth2_child3.txt
+GIF File: rollouts/rollout_depth2_child3.gif
+------------------------------------------------------

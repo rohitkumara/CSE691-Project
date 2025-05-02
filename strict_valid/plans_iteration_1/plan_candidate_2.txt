@@ -1,0 +1,5 @@
+Steps:
+Move to green door at (5, 2)
+**Pick up box:** Pick up the box.
+Move to the goal
+Drop the box

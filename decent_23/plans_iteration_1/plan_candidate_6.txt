@@ -1,0 +1,20 @@
+Okay, I can help with that. Here's the plan:
+Move to (2, 3)
+Move to (2, 4)
+Pick up the green key
+Move to (2, 5)
+Move to (3, 5)
+Move to (4, 5)
+Move to (5, 5)
+Toggle the green door
+Move to (3, 1)
+Pick up the purple box
+Move to (4, 1)
+Move to (5, 1)
+Move to (6, 1)
+Move to (7, 1)
+Move to (7, 2)
+Move to (7, 3)
+Move to (7, 4)
+Move to the goal
+Drop the purple box

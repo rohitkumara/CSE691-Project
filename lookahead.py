@@ -47,7 +47,7 @@ class PathPlanner:
                 best_action = action
         return best_action
 
-    def rollout(self, state, depth=15):
+    def rollout(self, state, depth=30):
         total_cost = 0
         key_bonus = 0
         for _ in range(depth):

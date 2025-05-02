@@ -1,0 +1,22 @@
+Okay, I understand the environment and the mission. Here's the plan:
+Move to (2, 3)
+Move to (2, 4)
+Move to the green key
+Pick up the green key
+Move to (3, 5)
+Move to (4, 2)
+Move to the green door
+Toggle the green door
+Move to (6, 2)
+Move to (7, 1)
+Move to (8, 1)
+Move to (8, 2)
+Move to (8, 3)
+Move to (8, 4)
+Move to (8, 5)
+Move to (8, 4)
+Move to (8, 3)
+Move to (8, 2)
+Move to (8, 1)
+Move to (7, 1)
+Move to (6, 2)

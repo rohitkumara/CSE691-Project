@@ -1,0 +1,12 @@
+Steps:
+Here's a plan to deliver the purple box to the green goal:
+Pick up the purple box.
+Move to the green key
+Drop the purple box
+Pick up the green key
+Move to the green door
+Open the green door
+Move to the purple box
+Pick up the purple box
+Move to the goal
+Drop the purple box

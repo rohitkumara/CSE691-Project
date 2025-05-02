@@ -1,0 +1,13 @@
+Move to (3, 6)
+Toggle blue door
+Move to the box
+Pick up the box
+Move to the green key
+Drop the box
+Pick up the green key
+Move to the green door
+Toggle green door
+Move to the box
+Pick up the box
+Move to the goal
+Drop the box

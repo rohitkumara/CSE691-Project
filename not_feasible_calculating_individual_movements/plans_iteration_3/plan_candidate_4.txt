@@ -1,0 +1,7 @@
+Okay, I understand the environment and the goal. Here's the plan for the agent to deliver the box to the goal:
+Move to (3,3): Move one step east with the box.
+**Toggle green door:** Open the green door.
+Move to the box
+Pick up the box
+Move to the goal
+Drop the box

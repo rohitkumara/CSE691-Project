@@ -1,0 +1,14 @@
+Okay, I'm ready to plan the mission.
+Steps:
+Move to (3,5)
+Move to (5,5)
+Move to the green key
+Pick up the green key
+Move to the green door
+Toggle the green door
+Move to (5,5)
+Move to (4,1)
+Move to the box
+Pick up the box
+Move to the goal
+Drop the box

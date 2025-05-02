@@ -1,0 +1,13 @@
+Okay, I'm ready to plan the steps for the agent to deliver the box to the goal.
+Steps:
+Move to (3,2): Move one step east with the box.
+Move to (5, 2): Move one step east with the box.
+Drop the box.
+Move to the green key.
+Pick up the green key.
+Move to the green door.
+Toggle the green door.
+Move to the box.
+Pick up the box.
+Move to the goal.
+Drop the box.

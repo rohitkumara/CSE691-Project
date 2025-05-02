@@ -4,19 +4,21 @@ Mission: Deliver all the boxes to the goals
 
 === Steps ===
 1. Pick up the green key
-2. Move to the green door
-3. Toggle the green door
-4. Move to the yellow box
-5. Pick up the yellow box
-6. Move to the yellow goal
-7. Drop the yellow box
-8. Move to the blue key
-9. Pick up the blue key
-10. Move to the blue door
-11. Toggle the blue door
-12. Move to the purple box
-13. Pick up the purple box
-14. Move to the purple goal
-15. Drop the purple box
+2. Move to the yellow box
+3. Drop the green key
+4. Pick up the yellow box
+5. Move to (6, 2)
+6. Toggle the locked green door
+7. Move to (7, 2)
+8. Move to the yellow goal
+9. Drop the yellow box
+10. Move to (3, 8)
+11. Pick up the blue key
+12. Move to (6, 10)
+13. Toggle the locked blue door
+14. Move to (3, 1)
+15. Pick up the purple box
+16. Move to (11, 11)
+17. Drop the purple box
 
 === End of Plan ===

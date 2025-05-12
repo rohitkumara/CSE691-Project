@@ -18,7 +18,7 @@ Depth 0 | Child 6 | Cost: INF (Failed)
 Plan File: rollouts/plan_depth0_child6.txt
 GIF File: rollouts/rollout_depth0_child6.gif
 ------------------------------------------------------
-Depth 1 | Child 1 | Cost: 67.00
+Depth 1 | Child 1 | Cost: INF (Failed)
 Plan File: rollouts/plan_depth1_child1.txt
 GIF File: rollouts/rollout_depth1_child1.gif
 ------------------------------------------------------
@@ -34,11 +34,15 @@ Depth 1 | Child 4 | Cost: INF (Failed)
 Plan File: rollouts/plan_depth1_child4.txt
 GIF File: rollouts/rollout_depth1_child4.gif
 ------------------------------------------------------
-Depth 2 | Child 1 | Cost: INF (Failed)
+Depth 2 | Child 1 | Cost: 67.00
 Plan File: rollouts/plan_depth2_child1.txt
 GIF File: rollouts/rollout_depth2_child1.gif
 ------------------------------------------------------
 Depth 2 | Child 2 | Cost: INF (Failed)
 Plan File: rollouts/plan_depth2_child2.txt
 GIF File: rollouts/rollout_depth2_child2.gif
+------------------------------------------------------
+Depth 3 | Child 1 | Cost: INF (Failed)
+Plan File: rollouts/plan_depth3_child1.txt
+GIF File: rollouts/rollout_depth3_child1.gif
 ------------------------------------------------------

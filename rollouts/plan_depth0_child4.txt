@@ -20,11 +20,11 @@ Mission: Deliver all the boxes to the goals
 15. Toggle the locked blue door
 16. Move to (5, 7)
 17. Move to (4, 7)
-18. Drop the blue key
-19. Move to (3, 1)
+18. Move to (4, 1)
+19. Drop the blue key
 20. Pick up the purple box
-21. Move to (4, 7)
-22. Move to (11, 11)
+21. Move to (7, 10)
+22. Move to the purple goal
 23. Drop the purple box
 
 === End of Plan ===

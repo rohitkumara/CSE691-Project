@@ -4,8 +4,8 @@ Mission: Deliver all the boxes to the goals
 
 === Steps ===
 1. Pick up the green key
-2. Move to the locked green door
-3. Toggle the locked green door
+2. Toggle the locked green door
+3. Move to the green key
 4. Move to the yellow box
 5. Pick up the yellow box
 6. Move to the yellow goal

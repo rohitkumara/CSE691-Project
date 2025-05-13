@@ -7,20 +7,19 @@ Completed Subtasks So Far:
 - 2. Toggle locked green door
 
 === Steps ===
-1. Move to the green key
+1. Move to green key
 2. Pick up the green key
 3. Toggle locked green door
-4. Move to the yellow box
+4. Move to yellow box
 5. Pick up the yellow box
-6. Move to the yellow goal
+6. Move to (7, 2)
 7. Drop the yellow box
 8. Move to (6, 10)
-9. Move to the blue key
-10. Pick up the blue key
-11. Toggle locked blue door
-12. Move to (3, 1)
-13. Pick up the purple box
-14. Move to the purple goal
-15. Drop the purple box
+9. Pick up the blue key
+10. Toggle locked blue door
+11. Move to purple box
+12. Pick up the purple box
+13. Move to (11, 12)
+14. Drop the purple box
 
 === End of Plan ===

@@ -6,7 +6,7 @@ Mission: Deliver all the boxes to the goals
 1. Move to the green key
 2. Pick up the green key
 3. Move to the locked green door
-4. Toggle the locked green door
+4. Toggle locked green door
 5. Move to the yellow box
 6. Pick up the yellow box
 7. Move to the yellow goal
@@ -14,7 +14,7 @@ Mission: Deliver all the boxes to the goals
 9. Move to the blue key
 10. Pick up the blue key
 11. Move to the locked blue door
-12. Toggle the locked blue door
+12. Toggle locked blue door
 13. Move to the purple box
 14. Pick up the purple box
 15. Move to the purple goal

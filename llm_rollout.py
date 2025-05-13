@@ -1,13 +1,7 @@
-# import os
-# import copy
 import csv
-# import matplotlib.pyplot as plt
-# from env import SimpleEnv
-# from lookahead import PathPlanner
-# from gpt_utils import extract_objects, format_env_state_for_gpt, get_gpt_plan
 from env import SimpleEnv
 from lookahead import PathPlanner
-from gpt_utils import extract_objects, format_env_state_for_gpt, get_gpt_plan
+from gpt_utils import extract_objects, format_env_state_for_gpt, get_gpt_plan, get_target_position
 import matplotlib.pyplot as plt
 import copy
 import imageio
@@ -52,8 +46,6 @@ def save_plan_summary(summary_path, depth, child, rollout_cost, plan_path, gif_p
 def apply_subtask_to_env(env, subtask):
     """Applies a high-level subtask like Move to object, Pick up, Drop, Toggle to the real environment."""
     subtask = subtask.lower()
-
-    from gpt_utils import get_target_position
     objects = extract_objects(env.grid)
     parsed = get_target_position(subtask, objects)
 
@@ -73,9 +65,7 @@ def apply_subtask_to_env(env, subtask):
         if action is not None:
             obs, _, _, _, _ = env.step(action, obj_type)
     elif isinstance(parsed, tuple):
-        # print("hope")
-        # print("parsed:", parsed, type(parsed))
-        # Move to target position
+        
         target_pos = parsed
         path = PathPlanner(env, None)
         path.set_goal(target_pos)
@@ -85,7 +75,6 @@ def apply_subtask_to_env(env, subtask):
 
         while path.manhattan(env.agent_pos, target_pos) > 1:
             action = path.one_step_lookahead_with_rollout(path.extract_state(env))
-            # print(action)
             if action is None:
                 print("[Warning] Agent stuck, cannot move to target.")
                 return
@@ -133,8 +122,6 @@ def generate_environment_description(env, agent_pos, objects, goal_pos, width=10
     desc.append("- The agent must deliver the box to the goal by picking it up and dropping it adjacent to the goal.")
     desc.append("- Shorter paths are preferred.")
 
-    # print("\n".join(desc))
-    # sys.exit()
 
     return "\n".join(desc)
 
@@ -252,14 +239,10 @@ def execute_plan_with_gif(env, plan, path, gif_name="rollout.gif"):
     timesteps = 0
     frames = []
     unchanged_counter = 0
-    from gpt_utils import get_target_position
-
     last_pos = tuple(env.agent_pos)
 
     for step in plan:
-        # print(step)
         objects = extract_objects(env.grid)
-        # print("-", step)
         target_pos = get_target_position(step, objects)
         if target_pos is None:
             continue
@@ -382,6 +365,7 @@ def generate_plan_from_chain(env, subtask_chain, agent_pos, objects, goal, missi
     # === Final Prompt ===
     
     full_prompt = prompt + "\n".join(env_lines) + example
+
     #full_prompt = full_prompt
 
     print("\n[LLM Prompt for Full Plan Generation]\n", full_prompt)
@@ -404,12 +388,10 @@ Only allowed actions: Move, Pick up, Drop, Toggle.
 def best_first_fortified_rollout_planner():
     env = SimpleEnv()
     obs, _ = env.reset()
-    import matplotlib.pyplot as plt
+    
     plt.imshow(obs["image"])
     plt.title("Initial Observation")
     plt.imsave("initial_observation.png", obs["image"])
-    # plt.show()
-    # sys.exit()
     current_env = copy.deepcopy(env)
 
     agent_pos = tuple(current_env.agent_pos)
@@ -445,16 +427,6 @@ def best_first_fortified_rollout_planner():
     while not done and iteration < MAX_DEPTH:
         num_subtasks = 8 if iteration == 0 else (6 if iteration == 1 else 3)
 
-        # eval_base_env = copy.deepcopy(current_env)
-        # #print(current_chain)
-        # if current_chain:
-        #     for i in current_chain:
-        #         apply_subtask_to_env(eval_base_env, i)  # Apply last best subtask
-        
-
-        #apply_subtask_to_env(current_env, current_chain) if current_chain else None
-        # agent_pos = tuple(current_env.agent_pos)
-        # objects = extract_objects(current_env.grid)
 
         # Always regenerate fresh environment description
         env_desc = generate_environment_description(current_env,
@@ -476,7 +448,6 @@ def best_first_fortified_rollout_planner():
             num_subtasks=num_subtasks
         )
 
-        # subtasks = ["Move to blue key"]
 
         if not subtasks:
             print("[No subtasks found. Stopping.]")
@@ -502,10 +473,8 @@ def best_first_fortified_rollout_planner():
             candidate_chain = current_chain + [subtask]
             agent_pos = (int(agent_pos[0]), int(agent_pos[1]))
 
-            # sys.exit()
             plan = generate_plan_from_chain(subtask_env, candidate_chain, agent_pos, objects, goal, mission)
-            # plan = ['Pick up the purple box', 'Move to the green key', 'Drop the purple box', 'Pick up the green key', 'Move to the green door', 'Toggle the green door', 'Move to the purple box', 'Pick up the purple box', 'Move to the purple goal', 'Drop the purple box']
-            # plan = filter_valid_subtasks(plan)
+
 
             if not is_plan_valid(plan):
                 continue
@@ -518,7 +487,6 @@ def best_first_fortified_rollout_planner():
 
             print("Plan:", plan, "cost:", rollout_cost)
             print()
-            # sys.exit()
             plan_text_path = f"rollouts/plan_depth{iteration}_child{child_id}.txt"
             save_plan_text(plan, plan_text_path, depth=iteration, child=child_id, mission=mission, prior_chain=current_chain)
             save_plan_summary(summary_path, iteration, child_id, rollout_cost, plan_text_path, rollout_gif_path)
@@ -529,9 +497,6 @@ def best_first_fortified_rollout_planner():
                 best_subtask = subtask
                 best_plan = [best_subtask] + plan
 
-            # print("Current Chain:", current_chain)
-            # print("Subtask used:", subtask, "Rollout Cost:", rollout_cost)
-            # print("\t Plan for this subtask:", plan)
 
         if best_subtask is None:
             print("[No valid subtask selected. Stopping.]")
@@ -551,12 +516,12 @@ def best_first_fortified_rollout_planner():
         print(f"[Step {iteration}] Executing best subtask: {best_subtask}")
         current_chain.append(best_subtask)
 
-        #🌟 Apply subtask and immediately refresh environment
+        # Apply subtask and immediately refresh environment
         apply_subtask_to_env(current_env, best_subtask)
         agent_pos = tuple(current_env.agent_pos)
         objects = extract_objects(current_env.grid)
 
-        # 🌟 Fresh environment description is generated each loop
+        # Fresh environment description is generated each loop
 
         if is_box_at_goal(subtask_env):
             print("[Box delivered successfully!]")
@@ -574,15 +539,6 @@ def best_first_fortified_rollout_planner():
     final_agent_pos = tuple(current_env.agent_pos)
     final_goal = current_env.goal
 
-    # final_best_plan = generate_plan_from_chain(
-    #     current_chain,
-    #     final_agent_pos,
-    #     final_objects,
-    #     final_goal,
-    #     mission=mission,
-    #     width=current_env.width,
-    #     height=current_env.height
-    # )
 
     # final_best_plan = ['Move to purple box', 'Pick up the purple box', 'Move to the green key', 'Drop the purple box', 'Pick up the green key', 'Move to the green door', 'Toggle the green door', 'Move to the purple box', 'Pick up the purple box', 'Move to the purple goal', 'Drop the purple box']
     final_plan_text_path = "rollouts/final_best_plan.txt"

@@ -3,22 +3,24 @@ Depth: 1 | Child: 3
 Mission: Deliver all the boxes to the goals
 
 Completed Subtasks So Far:
-- 1. Move to green key
+- 1. Toggle locked green door
 
 === Steps ===
-1. Move to the blue key
-2. Move to the locked blue door
-3. Toggle the locked blue door
-4. Move to the green key
-5. Move to the locked green door
-6. Toggle the locked green door
-7. Move to the purple box
-8. Pick up the purple box
-9. Move to the purple goal
-10. Drop the purple box
-11. Move to the yellow box
-12. Pick up the yellow box
-13. Move to the yellow goal
-14. Drop the yellow box
+1. Move to the green key
+2. Pick up the green key
+3. Move to the locked green door
+4. Toggle the locked green door
+5. Move to the yellow box
+6. Pick up the yellow box
+7. Move to the yellow goal
+8. Drop the yellow box
+9. Move to the blue key
+10. Pick up the blue key
+11. Move to the locked blue door
+12. Toggle the locked blue door
+13. Move to the purple box
+14. Pick up the purple box
+15. Move to the purple goal
+16. Drop the purple box
 
 === End of Plan ===

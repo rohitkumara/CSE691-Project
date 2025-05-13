@@ -3,7 +3,7 @@ from __future__ import annotations
 from minigrid.core.constants import COLOR_NAMES
 from minigrid.core.grid import Grid
 from minigrid.core.mission import MissionSpace
-from minigrid.core.world_object import Door, Goal, Key, Wall, Box, Ball
+from minigrid.core.world_object import Door, Goal, Key, Wall, Box
 from minigrid.manual_control import ManualControl
 from minigrid.minigrid_env import MiniGridEnv
 

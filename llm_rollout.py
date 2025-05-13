@@ -222,7 +222,7 @@ Subtasks:
 Suggest around {num_subtasks} next valid subtasks.
 Begin now."""
 
-    # print("\n[LLM Prompt for Subtasks]\n", prompt)
+    print("\n[LLM Prompt for Subtasks]\n", prompt)
     subtasks = get_gpt_subtasks(prompt)
     subtasks = filter_valid_subtasks(subtasks)
     return subtasks
@@ -384,8 +384,8 @@ def generate_plan_from_chain(env, subtask_chain, agent_pos, objects, goal, missi
     full_prompt = prompt + "\n".join(env_lines) + example
     #full_prompt = full_prompt
 
-    #print("\n[LLM Prompt for Full Plan Generation]\n", full_prompt)
-
+    print("\n[LLM Prompt for Full Plan Generation]\n", full_prompt)
+    sys.exit()
     return get_gpt_plan(full_prompt)
 
 #def generate_plan_from_chain(env, subtask_chain, agent_pos, objects, goal, mission, width=10, height=10):

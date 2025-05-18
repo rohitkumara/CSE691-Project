@@ -9,6 +9,9 @@ from env import SimpleEnv
 from lookahead import PathPlanner
 from gpt_utils import get_action_type, extract_objects
 from llm_planner import LLMPlanner
+import re
+
+
 
 def save_plan_text(plan_steps, save_path, depth=None, child=None, mission=None, prior_chain=None):
     with open(save_path, 'w') as f:
@@ -26,15 +29,18 @@ def save_plan_text(plan_steps, save_path, depth=None, child=None, mission=None, 
             f.write(f"{idx}. {step}\n")
         f.write("\n=== End of Plan ===\n")
 
+
 def save_plan_summary(summary_path, depth, child, rollout_cost, plan_path, gif_path):
     with open(summary_path, 'a') as f:
-        cost_str = f"{rollout_cost:.2f}" if rollout_cost != float('inf') else "INF (Failed)"
+        cost_str = "INF (Failed)" if rollout_cost == float('inf') else f"{rollout_cost:.2f}"
         f.write(f"Depth {depth} | Child {child} | Cost: {cost_str}\n")
         f.write(f"Plan File: {plan_path}\n")
         f.write(f"GIF File: {gif_path}\n")
         f.write("------------------------------------------------------\n")
 
-def parse_and_execute_plan(env, plan_json, gif_name="rollouts/final_execution.gif"):
+
+
+def parse_and_execute_plan(env, plan_json, gif_name="rollouts/final_execution_json.gif"):
     path = PathPlanner(env, None)
     frames = []
     timesteps = 0
@@ -58,11 +64,34 @@ def parse_and_execute_plan(env, plan_json, gif_name="rollouts/final_execution.gi
                 if gcolor in target_name:
                     target = gpos
                     break
+        #
+        action_map = {"pickup": 4, "drop": 5, "toggle": 6}
 
-        if isinstance(target, dict):
-            action_map = {"pickup": 4, "drop": 5, "toggle": 6}
+        if action in action_map and isinstance(target, dict):
             act_id = action_map[action]
             obs, _, _, _, _ = env.step(act_id, target)
+
+        elif action == "move" and isinstance(target, (dict, tuple)):
+            if isinstance(target, dict):
+                target = target["pos"]
+            path.set_goal(target)
+            while path.manhattan(env.agent_pos, target) > 1:
+                if unchanged_counter >= 5:
+                    print("[Agent stuck. Aborting subtask execution.]")
+                    stuck_counter += 1
+                    imageio.mimsave(gif_name, frames, fps=2)
+                    return timesteps, stuck_counter, time.time() - start_time
+                act = path.one_step_lookahead_with_rollout(path.extract_state(env))
+                obs, _, _, _, _ = env.step(act)
+                frames.append(obs["image"])
+                timesteps += 1
+                if tuple(env.agent_pos) == last_pos:
+                    unchanged_counter += 1
+                else:
+                    unchanged_counter = 0
+                last_pos = tuple(env.agent_pos)
+
+        #    
         elif isinstance(target, tuple):
             path.set_goal(target)
             while path.manhattan(env.agent_pos, target) > 1:
@@ -88,12 +117,15 @@ def parse_and_execute_plan(env, plan_json, gif_name="rollouts/final_execution.gi
     imageio.mimsave(gif_name, frames, fps=2)
     return timesteps, stuck_counter, time.time() - start_time
 
+def strip_json_fence(text: str) -> str:
+    return re.sub(r"^```json\n|\n```$", "", text.strip())
+
 def best_first_rollout():
     os.makedirs("rollouts", exist_ok=True)
     env = SimpleEnv()
     obs, _ = env.reset()
     planner = LLMPlanner(env)
-    plt.imsave("rollouts/initial_obs.png", obs["image"])
+    plt.imsave("rollouts/initial_obs_json.png", obs["image"])
 
     current_env = copy.deepcopy(env)
     current_chain = []
@@ -105,13 +137,17 @@ def best_first_rollout():
 
     cost_evolution = []
     csv_log = []
-    summary_path = "rollouts/plans_summary.txt"
+    summary_path = "rollouts/plans_summary_json.txt"
     open(summary_path, 'w').close()
 
     while iteration < max_depth:
         num_subtasks = 8 if iteration == 0 else (6 if iteration == 1 else 3)
         subtasks_json = planner.generate("subtasks", num_subtasks=num_subtasks, prior_chain=current_chain)
+        print(subtasks_json)
+        print(type(subtasks_json))
+
         try:
+            subtasks_json = strip_json_fence(subtasks_json)
             subtasks_data = json.loads(subtasks_json)
             subtasks = subtasks_data.get("subtasks", [])
         except Exception as e:
@@ -121,13 +157,16 @@ def best_first_rollout():
         best_rollout_cost = float('inf')
         best_subtask = None
         best_plan = None
-        best_metrics = (0, 0, 0)
+        best_metrics = (0, 0, float('inf'))
 
         for i, subtask in enumerate(subtasks):
             trial_env = copy.deepcopy(current_env)
             planner.env = trial_env
             planner._apply_subtask(subtask)
             full_plan_json = planner.generate("actions", prior_chain=current_chain + [subtask])
+            full_plan_json = strip_json_fence(full_plan_json)
+            print("[LLM actions raw output]:")
+            print(full_plan_json)
             try:
                 full_plan_data = json.loads(full_plan_json)
                 full_plan = full_plan_data.get("actions", [])
@@ -137,16 +176,18 @@ def best_first_rollout():
 
             trial_env_copy = copy.deepcopy(trial_env)
             path = PathPlanner(trial_env_copy, None)
-            rollout_gif = f"rollouts/rollout_iter{iteration}_child{i+1}.gif"
+            rollout_gif = f"rollouts/rollout_iter{iteration}_child{i+1}_json.gif"
             cost, stucks, runtime = parse_and_execute_plan(trial_env_copy, full_plan, gif_name=rollout_gif)
+
+            plan_text_path = f"rollouts/plan_iter{iteration}_child{i+1}_json.txt"
+            save_plan_text(full_plan, plan_text_path, depth=iteration, child=i+1, mission=env.mission, prior_chain=current_chain)
+            save_plan_summary(summary_path, iteration, i+1, cost, plan_text_path, rollout_gif)
 
             if cost < best_rollout_cost:
                 best_rollout_cost = cost
                 best_subtask = subtask
                 best_plan = full_plan
                 best_metrics = (stucks, runtime, cost)
-
-            save_plan_summary(summary_path, iteration, i+1, cost, f"plan_iter{iteration}_child{i+1}.txt", rollout_gif)
 
         if best_subtask is None:
             print("[No valid subtask found. Terminating.]")
@@ -161,7 +202,9 @@ def best_first_rollout():
             final_best_plan = current_chain + best_plan
 
         current_chain.append(best_subtask)
-        planner._apply_subtask(current_env, best_subtask)
+        planner.env = current_env
+        planner._apply_subtask(best_subtask)
+
         cost_evolution.append(best_score)
         csv_log.append((iteration, best_subtask, *best_metrics))
 
@@ -175,9 +218,9 @@ def best_first_rollout():
         print("\n[Executing Final Best Plan]\n")
         env_replay = SimpleEnv()
         env_replay.reset()
-        parse_and_execute_plan(env_replay, final_best_plan, gif_name="rollouts/final_best_plan.gif")
+        parse_and_execute_plan(env_replay, final_best_plan, gif_name="rollouts/final_best_plan_json.gif")
 
-    with open("rollouts/plans_cost_log.csv", 'w', newline='') as csvfile:
+    with open("rollouts/plans_cost_log_json.csv", 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["Depth", "Subtask", "StuckCount", "Runtime", "Cost"])
         for row in csv_log:
@@ -189,8 +232,9 @@ def best_first_rollout():
     plt.xlabel('Planning Step (Depth)')
     plt.ylabel('Rollout Cost')
     plt.grid(True)
-    plt.savefig("rollouts/cost_evolution_plot.png")
+    plt.savefig("rollouts/cost_evolution_plot_json.png")
     plt.close()
+
 
 if __name__ == "__main__":
     best_first_rollout()

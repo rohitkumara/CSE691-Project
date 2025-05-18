@@ -9,6 +9,7 @@ import os
 import re
 import heapq
 from gpt_utils import client
+#import sys
 
 # ========== Utility Functions ==========
 
@@ -369,7 +370,6 @@ def generate_plan_from_chain(env, subtask_chain, agent_pos, objects, goal, missi
     #full_prompt = full_prompt
 
     print("\n[LLM Prompt for Full Plan Generation]\n", full_prompt)
-    sys.exit()
     return get_gpt_plan(full_prompt)
 
 #def generate_plan_from_chain(env, subtask_chain, agent_pos, objects, goal, mission, width=10, height=10):

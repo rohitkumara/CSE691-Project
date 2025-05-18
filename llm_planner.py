@@ -1,14 +1,25 @@
-from gpt_utils import extract_objects
+from gpt_utils import extract_objects, get_action_type
 from env import SimpleEnv
 from lookahead import PathPlanner
 from minigrid.core.world_object import Door, Goal, Key, Wall, Box
 import json
-from openai import OpenAI
+import openai
 import matplotlib.pyplot as plt
+import numpy as np
+
+def convert(obj):
+    if isinstance(obj, dict):
+        return {k: convert(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [convert(v) for v in obj]
+    elif isinstance(obj, np.integer):
+        return int(obj)
+    else:
+        return obj
 
 
 class LLMPlanner():
-    def __init__(self, env, model_name="gpt-4.1-nano"):
+    def __init__(self, env, model_name="gemini-2.0-flash"):
         self.env = env
         self.path_planner = PathPlanner(env, None)
         self.model = model_name
@@ -20,7 +31,11 @@ class LLMPlanner():
 
     def _set_client(self):
         api_key = self.load_api_key()
-        return OpenAI(api_key=api_key)
+        return openai.OpenAI(
+            api_key=api_key,
+            base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+        )
+    import numpy as np
 
     def _get_objects(self):
         keys, boxes, goals, doors, walls = {}, {}, {}, {}, []
@@ -42,6 +57,63 @@ class LLMPlanner():
                     walls.append((x, y))
         return keys, boxes, goals, doors, walls
 
+    def _apply_subtask(self, subtask):
+        action = get_action_type(subtask["action"])
+        target_name = subtask["target"].lower()
+        objects = extract_objects(self.env.grid)
+
+        target = None
+        '''
+        for obj in objects:
+            if obj["type"] in target_name and obj["color"] in target_name:
+                target = obj
+                break
+        '''
+        for obj in objects:
+            label = f"{obj['color']} {obj['type']}".lower()
+            if target_name.strip() in label or label in target_name.strip():
+                target = obj
+                break
+
+        #if "goal" in target_name:
+        if target is None:
+            print(f"[Warning] Could not resolve target for subtask: {subtask}")
+            return "stuck"
+        if target is None and "goal" in target_name:
+            for gpos, gcolor in self.env.goal:
+                if gcolor in target_name:
+                    target = gpos
+                    break
+        
+
+        if action in {"pickup", "drop", "toggle"} and isinstance(target, dict):
+            action_map = {"pickup": 4, "drop": 5, "toggle": 6}
+            act_id = action_map[action]
+            self.env.step(act_id, target)
+
+        elif action == "move" and isinstance(target, (tuple, dict)):
+            # If target is an object, extract position
+            if isinstance(target, dict):
+                target = target["pos"]
+
+            path = PathPlanner(self.env, target)
+            path.set_goal(target)
+            unchanged_counter = 0
+            last_pos = tuple(self.env.agent_pos)
+
+            while path.manhattan(self.env.agent_pos, target) > 1:
+                if unchanged_counter >= 5:
+                    print("[Agent stuck. Aborting move-to subtask.]")
+                    return "stuck"
+                act = path.one_step_lookahead_with_rollout(path.extract_state(self.env))
+                self.env.step(act)
+                if tuple(self.env.agent_pos) == last_pos:
+                    unchanged_counter += 1
+                else:
+                    unchanged_counter = 0
+                last_pos = tuple(self.env.agent_pos)
+
+
     def _gen_subtasks_prompt(self, num_subtasks):
         instr = (
             f"Generate a valid, ordered list of {num_subtasks} high-level subtasks to complete the mission. "
@@ -53,7 +125,10 @@ class LLMPlanner():
             "mission": self.env.mission,
             "agent": {
                 "position": list(self.env.agent_pos),
-                "inventory": self.env.carrying,
+                "inventory": {
+                    "type": self.env.carrying.type,
+                    "color": self.env.carrying.color
+                } if self.env.carrying else None,
             },
             "objects": {
                 "keys": {color: list(pos) for color, pos in keys.items()},
@@ -78,8 +153,8 @@ class LLMPlanner():
             },
             "instructions": instr
         }
-        return json.dumps(prompt_data, indent=2)
-
+        return json.dumps(convert(prompt_data), indent=2)
+    
     def _gen_actions_prompt(self, prior_chain):
         instr = (
             "Generate a sequence of actions to complete the mission. "
@@ -92,7 +167,10 @@ class LLMPlanner():
             "completed_subtasks": prior_chain or [],
             "agent": {
                 "position": list(self.env.agent_pos),
-                "inventory": self.env.carrying,
+                "inventory": {
+                "type": self.env.carrying.type,
+                "color": self.env.carrying.color
+            } if self.env.carrying else None,
             },
             "objects": {
                 "keys": {color: list(pos) for color, pos in keys.items()},
@@ -117,7 +195,7 @@ class LLMPlanner():
             },
             "instructions": instr
         }
-        return json.dumps(prompt_data, indent=2)
+        return json.dumps(convert(prompt_data), indent=2)
 
     def generate(self, task="subtasks", num_subtasks=8, prior_chain=None):
         if task == "subtasks":
@@ -163,3 +241,38 @@ class LLMPlanner():
             if not obj or obj.type != "box" or obj.color != color:
                 return False
         return True
+
+if __name__ == "__main__":
+
+    '''
+    Sample Output:
+    Subtasks:
+        {
+        "subtasks": [
+            {"action": "Move to", "target": "green key"},
+            {"action": "Pick up", "target": "green key"},
+            ...
+        ]
+        }
+
+    Actions:
+        {
+        "actions": [
+            {"action": "Move to", "target": "green key"},
+            {"action": "Pick up", "target": "green key"},
+            ...
+        ]
+        }
+    '''
+
+    env = SimpleEnv()
+    obs, _ = env.reset()
+
+    plt.imsave("initial_observation.png", obs["image"])
+
+    llmp = LLMPlanner(env)
+
+    llmp.generate("subtasks")
+    llmp.generate("actions")
+    print(llmp.generate("subtasks"))
+    print(llmp.generate("actions"))

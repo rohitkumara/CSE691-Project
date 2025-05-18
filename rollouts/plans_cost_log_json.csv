@@ -1,0 +1,3 @@
+Depth,Subtask,StuckCount,Runtime,Cost
+0,"{'action': 'Move to', 'target': 'yellow box'}",1,0.527839183807373,18
+1,"{'action': 'Move to', 'target': 'yellow box'}",1,0.7446877956390381,15

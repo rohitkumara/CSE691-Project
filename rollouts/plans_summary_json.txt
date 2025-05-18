@@ -1,0 +1,48 @@
+Depth 0 | Child 1 | Cost: 49.00
+Plan File: rollouts/plan_iter0_child1_json.txt
+GIF File: rollouts/rollout_iter0_child1_json.gif
+------------------------------------------------------
+Depth 0 | Child 2 | Cost: 24.00
+Plan File: rollouts/plan_iter0_child2_json.txt
+GIF File: rollouts/rollout_iter0_child2_json.gif
+------------------------------------------------------
+Depth 0 | Child 3 | Cost: 54.00
+Plan File: rollouts/plan_iter0_child3_json.txt
+GIF File: rollouts/rollout_iter0_child3_json.gif
+------------------------------------------------------
+Depth 0 | Child 4 | Cost: 51.00
+Plan File: rollouts/plan_iter0_child4_json.txt
+GIF File: rollouts/rollout_iter0_child4_json.gif
+------------------------------------------------------
+Depth 0 | Child 5 | Cost: 18.00
+Plan File: rollouts/plan_iter0_child5_json.txt
+GIF File: rollouts/rollout_iter0_child5_json.gif
+------------------------------------------------------
+Depth 0 | Child 6 | Cost: 37.00
+Plan File: rollouts/plan_iter0_child6_json.txt
+GIF File: rollouts/rollout_iter0_child6_json.gif
+------------------------------------------------------
+Depth 0 | Child 7 | Cost: 54.00
+Plan File: rollouts/plan_iter0_child7_json.txt
+GIF File: rollouts/rollout_iter0_child7_json.gif
+------------------------------------------------------
+Depth 0 | Child 8 | Cost: 63.00
+Plan File: rollouts/plan_iter0_child8_json.txt
+GIF File: rollouts/rollout_iter0_child8_json.gif
+------------------------------------------------------
+Depth 1 | Child 1 | Cost: 56.00
+Plan File: rollouts/plan_iter1_child1_json.txt
+GIF File: rollouts/rollout_iter1_child1_json.gif
+------------------------------------------------------
+Depth 1 | Child 2 | Cost: 18.00
+Plan File: rollouts/plan_iter1_child2_json.txt
+GIF File: rollouts/rollout_iter1_child2_json.gif
+------------------------------------------------------
+Depth 1 | Child 3 | Cost: 54.00
+Plan File: rollouts/plan_iter1_child3_json.txt
+GIF File: rollouts/rollout_iter1_child3_json.gif
+------------------------------------------------------
+Depth 1 | Child 4 | Cost: 16.00
+Plan File: rollouts/plan_iter1_child4_json.txt
+GIF File: rollouts/rollout_iter1_child4_json.gif
+------------------------------------------------------

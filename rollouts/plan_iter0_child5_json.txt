@@ -1,0 +1,21 @@
+=== PLAN DETAILS ===
+Depth: 0 | Child: 5
+Mission: Deliver all the boxes to the goals
+
+=== Steps ===
+1. {'action': 'Move to', 'target': 'yellow box'}
+2. {'action': 'Pick up', 'target': 'yellow box'}
+3. {'action': 'Move to', 'target': 'green key'}
+4. {'action': 'Move to', 'target': 'green door'}
+5. {'action': 'Toggle', 'target': 'green door'}
+6. {'action': 'Move to', 'target': 'yellow goal'}
+7. {'action': 'Drop', 'target': 'yellow box'}
+8. {'action': 'Move to', 'target': 'purple box'}
+9. {'action': 'Pick up', 'target': 'purple box'}
+10. {'action': 'Move to', 'target': 'blue key'}
+11. {'action': 'Move to', 'target': 'blue door'}
+12. {'action': 'Toggle', 'target': 'blue door'}
+13. {'action': 'Move to', 'target': 'purple goal'}
+14. {'action': 'Drop', 'target': 'purple box'}
+
+=== End of Plan ===

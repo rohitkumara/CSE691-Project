@@ -1,0 +1,16 @@
+# Core grid environment
+gymnasium>=0.28.0
+minigrid>=2.3.0
+
+# Visualization and plotting
+matplotlib>=3.7.0
+imageio>=2.31.0
+
+# OpenAI API for LLM interactions
+openai>=0.27.0
+
+# Data manipulation
+numpy>=1.24.0
+
+# Optional but recommended for environment rendering
+pygame>=2.5.0

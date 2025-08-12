@@ -209,7 +209,7 @@ Subtasks:
 Suggest around {num_subtasks} next valid subtasks.
 Begin now."""
 
-    print("\n[LLM Prompt for Subtasks]\n", prompt)
+    # print("\n[LLM Prompt for Subtasks]\n", prompt)
     subtasks = get_gpt_subtasks(prompt)
     subtasks = filter_valid_subtasks(subtasks)
     return subtasks
@@ -368,8 +368,7 @@ def generate_plan_from_chain(env, subtask_chain, agent_pos, objects, goal, missi
 
     #full_prompt = full_prompt
 
-    print("\n[LLM Prompt for Full Plan Generation]\n", full_prompt)
-    sys.exit()
+    # print("\n[LLM Prompt for Full Plan Generation]\n", full_prompt)
     return get_gpt_plan(full_prompt)
 
 #def generate_plan_from_chain(env, subtask_chain, agent_pos, objects, goal, mission, width=10, height=10):
@@ -389,9 +388,10 @@ def best_first_fortified_rollout_planner():
     env = SimpleEnv()
     obs, _ = env.reset()
     
-    plt.imshow(obs["image"])
-    plt.title("Initial Observation")
-    plt.imsave("initial_observation.png", obs["image"])
+    # plt.imshow(obs["image"])
+    # plt.title("Initial Observation")
+    # # plt.imsave("initial_observation.png", obs["image"])
+    
     current_env = copy.deepcopy(env)
 
     agent_pos = tuple(current_env.agent_pos)

@@ -24,7 +24,7 @@ The goal is to test whether **LLMs + rollout strategies** can produce efficient,
 
 ## 🛠 Results
 
-
+The GIFs of the results are available in the `./results` directory.
 
 ---
 
